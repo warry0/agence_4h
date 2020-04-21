@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
  */
 class Property
 {
     /**
+     * 
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -27,6 +30,7 @@ class Property
     private $description;
 
     /**
+     * @Assert\Range(min=9,max=600)
      * @ORM\Column(type="integer")
      */
     private $surface;
@@ -62,9 +66,10 @@ class Property
     private $address;
 
     /**
+     * @Assert\Range("/^[0-9]{5}$/")
      * @ORM\Column(type="string", length=255)
      */
-    private $postal_code;
+    private $postalCode;
 
     /**
      * @ORM\Column(type="boolean")
@@ -205,14 +210,14 @@ class Property
         return $this;
     }
 
-    public function getPostal_code(): ?string
+    public function getPostalCode(): ?string
     {
-        return $this->postal_code;
+        return $this->postalCode;
     }
 
-    public function setPostal_code(string $postal_code): self
+    public function setPostalCode(string $postalCode): self
     {
-        $this->postal_code = $postal_code;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
