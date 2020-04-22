@@ -91,7 +91,6 @@ class Property
     public function __construct()
     {
         $this->create_at = new \DateTime();
-        
     }
 
     public function getId(): ?int
@@ -112,8 +111,8 @@ class Property
     }
 
     public function getSlug(): string
-    { 
-       return  (new Slugify())->slugify($this->title);
+    {
+        return (new Slugify())->slugify($this->title);
     }
 
     public function getDescription(): ?string

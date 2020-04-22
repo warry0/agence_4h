@@ -24,18 +24,18 @@ class PropertyController extends AbstractController
     public function __construct(PropertyRepository $repo, EntityManagerInterface $em)
     {
         $this->repo = $repo;
-         $this->em = $em; 
+        $this->em = $em;
     }
     /**
      * @Route("/biens", name="property.index") 
      * @return Response
-     */  
-    public function index() : Response
+     */
+    public function index(): Response
     {
         //$property = $this->repo->findAllVisible();
         //$property[0]->setSold(true); changement bien vendu
         //$this->em->flush();
-        
+
 
         /* $property = new Property();
         $property->setTitle('Bien test')
@@ -55,7 +55,7 @@ class PropertyController extends AbstractController
 
         /* $rep = $this->getDoctrine()->getRepository(Property::class);
         dump($rep); */
-        return $this->render('property/index.html.twig',[
+        return $this->render('property/index.html.twig', [
             'menu_p' => 'properties'
         ]);
     }
@@ -67,16 +67,15 @@ class PropertyController extends AbstractController
      */
     public function show(Property $property, string $slug): Response
     {
-        if( $property->getSlug() !== $slug){
-        $this->redirectToRoute('property.show', [
-            'id' => $property->getId(),
-            'slug' => $property->getSlug()
-        ],301);
-    }
-        return $this->render('property/show.html.twig',[
+        if ($property->getSlug() !== $slug) {
+            $this->redirectToRoute('property.show', [
+                'id' => $property->getId(),
+                'slug' => $property->getSlug()
+            ], 301);
+        }
+        return $this->render('property/show.html.twig', [
             'property' => $property,
             'menu_p' => 'properties'
         ]);
     }
-  
 }

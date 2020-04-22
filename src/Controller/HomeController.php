@@ -11,15 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 class HomeController extends AbstractController
 {
 
-/**
- * @Route("/",name="home")
- * @param PropertyRepository $repo
- * @return Response
- */
+    /**
+     * @Route("/",name="home")
+     * @param PropertyRepository $repo
+     * @return Response
+     */
     public function index(PropertyRepository $repo): Response
     {
         $properties = $repo->findLatest();
-        return $this->render('accueil/home.html.twig',[
+        return $this->render('accueil/home.html.twig', [
             'properties' => $properties
         ]);
     }

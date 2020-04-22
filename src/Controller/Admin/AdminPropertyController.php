@@ -21,7 +21,7 @@ class AdminPropertyController extends AbstractController
     /**
      * @var EntityManagerInterface
      */
-    private $em; 
+    private $em;
 
     public function __construct(PropertyRepository $repo, EntityManagerInterface $em)
     {
@@ -36,7 +36,7 @@ class AdminPropertyController extends AbstractController
     public function index()
     {
         $properties = $this->repo->findAll();
-        return $this->render('admin/property/index.html.twig',compact('properties'));
+        return $this->render('admin/property/index.html.twig', compact('properties'));
     }
 
     /**
@@ -48,13 +48,13 @@ class AdminPropertyController extends AbstractController
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($property);
             $this->em->flush();
-            $this->addFlash('success','Bien créé avec succés');
+            $this->addFlash('success', 'Bien créé avec succés');
             return $this->redirectToRoute('admin.property.index');
         }
-        return $this->render('admin/property/new.html.twig',[
+        return $this->render('admin/property/new.html.twig', [
             'property' => $property,
             'form' => $form->createView()
         ]);
@@ -66,16 +66,16 @@ class AdminPropertyController extends AbstractController
      * @param Request $request
      * @return Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Property $property,Request $request)
+    public function edit(Property $property, Request $request)
     {
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
-            $this->addFlash('success','Bien modifié avec succés');
+            $this->addFlash('success', 'Bien modifié avec succés');
             return $this->redirectToRoute('admin.property.index');
         }
-        return $this->render('admin/property/edit.html.twig',[
+        return $this->render('admin/property/edit.html.twig', [
             'property' => $property,
             'form' => $form->createView()
         ]);
@@ -89,10 +89,10 @@ class AdminPropertyController extends AbstractController
      */
     public function delete(Property $property, Request $request)
     {
-        if($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token'))) {
             $this->em->remove($property);
             $this->em->flush();
-            $this->addFlash('success','Bien supprimé avec succés');
+            $this->addFlash('success', 'Bien supprimé avec succés');
             //return new Response('suppr');
         }
         return $this->redirectToRoute('admin.property.index');

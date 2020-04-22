@@ -21,31 +21,31 @@ class PropertyRepository extends ServiceEntityRepository
     }
     /**
      * @return Property[]
-     */ 
-     
+     */
+
     public function findAllVisible(): array
     {
         return $this->findVisibleQuery()
-        ->getQuery()
-        ->getResult();
+            ->getQuery()
+            ->getResult();
     }
 
     /**
      * @return Property[]
-     */ 
+     */
 
     public function findLatest(): array
     {
         return $this->findVisibleQuery()
-        ->setMaxResults(4)
-        ->getQuery()
-        ->getResult();
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
     }
 
-    private function findVisibleQuery() : QueryBuilder
+    private function findVisibleQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('p')
-        ->where('p.sold = false');
+            ->where('p.sold = false');
     }
 
     // /**
