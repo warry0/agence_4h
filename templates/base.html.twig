@@ -21,9 +21,21 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" {% if menu_p is defined and menu_p == 'properties' %} active
-                        {% endif %}href="{{path('property.index')}}">Nos Biens <span
-                            class="sr-only">(current)</span></a>
+                        {% endif %}href="{{path('property.index')}}">Nos Biens</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav">
+            <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{{ path ('admin.property.index') }}" class="nav-link">Connexion</a></button>
+                 </form>
+                </ul>
+            {% if app.user %}
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ path ('logout') }}" class="nav-link">Déconnexion</a>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
     </nav>
     {% block body %}{% endblock %}

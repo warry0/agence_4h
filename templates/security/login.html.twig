@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title "Se connecter " %}
+
+{% block body %}
+ <div class="container mt-4"> 
+
+    {% if error %}
+    <div class="alert alert-danger">
+         {{ error.messageKey | trans(error.messagedata, 'security')}}
+    </div>
+       
+    {% endif %}
+    <form action="{{ path ('login') }}" method="post">
+        <div class="form-group">
+            <label for="username"> Nom d'utilisateur </label>
+            <input type="text" id="username" name="_username" class="form-control" value="{{ lasusername }}">
+        </div>
+        <div class="form-group">
+            <label for="password"> Mot de passe </label>
+            <input type="password" id="password" name="_password" class="form-control">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"> Mémoriser</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </form>
+</div>
+{# <form action="{{ path ('login') }}" method="post">
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Connexion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <label for="username"> Nom d'utilisateur </label>
+            <input type="text" id="username" name="_username" class="form-control" value="{{ lasusername }}">
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <label for="password"> Mot de passe </label>
+            <input type="password" id="password" name="_password" class="form-control">
+        </div>
+
+      </div>
+      <div class="checkbox">
+            <label><input type="checkbox"> Mémoriser</label>
+        </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form> #}
+{# <div class="text-center">
+  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Launch
+    Modal Login Form</a>#}
+</div> 
+{% endblock %}
