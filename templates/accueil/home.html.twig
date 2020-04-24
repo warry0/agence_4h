@@ -3,26 +3,29 @@
 {% block title "Agence 4H" %}
 
 {% block body %}
-<div class='jumbotron text-center'>
-    <h1>Agence imobiliaire</h1>
-</div>
-</div class="container">
-<h2 class="ml-4">Les derniers biens</h2>
-<div class="row justify-content-center">
-{% for property in properties %}
-    <div class="col 3">
-        <div class="card ml-4" style="width: 18rem;">
-            <div calss="card-body">
-                <h5 class="card-title">
-                    <a href="{{ path ('property.show', {id: property.id, slug: property.slug }) }}">{{ property.title }}</a>
-                </h5>
-                <p class="card-text">{{ property.city }} ({{ property.postalCode }})</p>
-                <div class="text-primary" style="font-weight: bold; font-size: 2rem">{{ property.formattedPrice }} €
-                </div>
-            </div>
-        </div>
-    </div>
-{% endfor %}
-</div>
-</div>
+	<div class='jumbotron text-center'>
+		<h1>Agence imobiliaire</h1>
+	</div>
+
+	<div class="container text-center">
+		<h2 class="mb-4 text-bold">Les derniers biens</h2>
+		<div class="row justify-content-center">
+			{% for property in properties %}
+				<div class="col-3">
+					<div class="card ml-4">
+						<div calss="card-body">
+							<h5 class="card-title">
+								<a href="{{ path ('property.show', {id: property.id, slug: property.slug }) }}">{{ property.title }}</a>
+							</h5>
+							<p class="card-text">{{ property.city }}
+								({{ property.postalCode }})</p>
+							<div class="text-primary" style="font-weight: bold; font-size: 2rem">{{ property.formattedPrice }}
+								€
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
