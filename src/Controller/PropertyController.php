@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\PropertyShearch;
+use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -31,36 +33,23 @@ class PropertyController extends AbstractController
      * @Route("/biens", name="property.index") 
      * @return Response
      */
-    public function index(PaginatorInterface $paginator,Request $request): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
+        $search = new PropertyShearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
+
+
         $properties = $paginator->paginate(
-            $this->repo->findAllVisibleQuery(),
-        $request->query->getInt('page', 1),12);
-        //$property[0]->setSold(true); changement bien vendu
-        //$this->em->flush();
+            $this->repo->findAllVisibleQuery($search),
+            $request->query->getInt('page', 1),
+            12
+        );
 
-
-        /* $property = new Property();
-        $property->setTitle('Bien test')
-        ->setPrice(300000)
-        ->setRooms(4)
-        ->setBedrooms(3)
-        ->setDescription('tjr un test')
-        ->setSurface(80)
-        ->setFloor(2)
-        ->setCity('Massy')
-        ->setPostal_code(91300)
-        ->setAddress('10 rue las bas');
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($property);
-        $em->flush(); */
-
-        /* $rep = $this->getDoctrine()->getRepository(Property::class);
-        dump($rep); */
         return $this->render('property/index.html.twig', [
             'menu_p' => 'properties',
-            'properties' => $properties
+            'properties' => $properties,
+            'form' => $form->createView()
         ]);
     }
 
@@ -83,3 +72,25 @@ class PropertyController extends AbstractController
         ]);
     }
 }
+       //$property[0]->setSold(true); changement bien vendu
+        //$this->em->flush();
+
+
+        /* $property = new Property();
+        $property->setTitle('Bien test')
+        ->setPrice(300000)
+        ->setRooms(4)
+        ->setBedrooms(3)
+        ->setDescription('tjr un test')
+        ->setSurface(80)
+        ->setFloor(2)
+        ->setCity('Massy')
+        ->setPostal_code(91300)
+        ->setAddress('10 rue las bas');
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($property);
+        $em->flush(); */
+
+        /* $rep = $this->getDoctrine()->getRepository(Property::class);
+        dump($rep); */
