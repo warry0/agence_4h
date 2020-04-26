@@ -6,12 +6,15 @@
  <div class="jumbotron">
 	<div class="div container">
 		{{form_start(form)}}
-		<div class="div form-row">
+		<div class="div form-row align-items-ends">
 			<div class="col">
 				{{form_row(form.minSurface)}}
 			</div>
 			<div class="col">
 				{{form_row(form.maxPrice)}}
+			</div>
+			<div class="col">
+				{{form_row(form.options)}}
 			</div>
 			<div class="col">
 				<button class=" btn btn-primary">Rechercher</button>
@@ -35,3 +38,4 @@
 		</div>
 	</div>
 {% endblock %}
+
