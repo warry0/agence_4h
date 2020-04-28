@@ -13,6 +13,7 @@
 			{% for property in properties %}
 				<div class="col-3">
 					<div class="card ml-4">
+						
 						<div calss="card-body">
 							<h5 class="card-title">
 								<a href="{{ path ('property.show', {id: property.id, slug: property.slug }) }}">{{ property.title }}</a>
